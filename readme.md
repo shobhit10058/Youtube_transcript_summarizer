@@ -64,8 +64,10 @@ Then, after the text is received, it is passed to the content js which then chan
 It can be used by loading unpacked from [chrome://extensions/](chrome://extensions/).
 
 ### Improvements:
-1. Presently, only basic setup is done. Summarization needs to improved, if the content can be broken in some parts 
+1. Presently, only basic setup is done. Exception handling is left, if the url is not correct. 
+   This would not happen when using chrome extension but if used independtly then it can occur.
+2. Summarization needs to improved, if the content can be broken in some parts 
    and then summarization is done and that is given as time stamps.
-2. The transcript is presently working only for youtube videos having captions on, the audio and text processing are left.
-3. There can be extra features of choosing language and length of summary.
+3. The transcript is presently working only for youtube videos having captions on, the audio and text processing are left.
+4. There can be extra features of choosing language and length of summary.
 
