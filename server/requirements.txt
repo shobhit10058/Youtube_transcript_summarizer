@@ -26,7 +26,7 @@ MarkupSafe==1.1.1
 matplotlib==3.4.1
 msgpack==1.0.2
 murmurhash==1.0.5
-numpy==1.20.2
+numpy==1.19.2
 opt-einsum==3.3.0
 packaging==20.9
 pathy==0.5.2
@@ -38,12 +38,12 @@ pyOpenSSL==20.0.1
 pyparsing==2.4.7
 python-dateutil==2.8.1
 regex==2021.4.4
-requests==2.25.1
+requests==2.23.0
 sacremoses==0.0.45
 scikit-learn==0.24.2
 scipy==1.6.3
 sentencepiece==0.1.95
-six==1.16.0
+six==1.15.0
 smart-open==3.0.0
 spacy==3.0.6
 spacy-legacy==3.0.5
@@ -59,3 +59,4 @@ wasabi==0.8.2
 Werkzeug==1.0.1
 youtube-transcript-api==0.4.1
 torch
+pyngrok
