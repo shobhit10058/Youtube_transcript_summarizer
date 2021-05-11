@@ -1,0 +1,12 @@
+.summary_box{
+    overflow-y: auto;
+    max-height: 30em;  
+    width: inherit; 
+    font-family: inherit;
+    border-bottom: 0.5px solid black;
+}
+.summary_box p{
+    padding: 5px;
+    font-size: medium;
+    text-align: center;
+}
