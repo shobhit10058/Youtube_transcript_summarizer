@@ -46,7 +46,7 @@ After this, the summary is generated using the transformers. As described here [
 
 The length of the transcript short by applying *extractive summarization* with *bert model* and then the *T5 model* is used .
 
-The summary is then given back as a HTTP response after one gives a GET HTTP request on /api/summarize?youtube_video="a valid url".
+The summary is then given back as a HTTP response after one gives a GET HTTP request on */api/summarize?youtube_video="a valid url"*.
 
 To server the request over HTTPS (as the youtube is a https website and generating a HTTP request to a http website will give a mixed content error), the app needs be to run on https rather than http, for this there can be two solutions -
 
