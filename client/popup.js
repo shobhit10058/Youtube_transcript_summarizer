@@ -4,9 +4,10 @@ SummaryButton.onclick = e => {
 
     chrome.tabs.query({active: true, currentWindow: true}, tabs => {    
         let url = tabs[0].url;
-        let patt = "*://www.youtube.com/watch?v=*";
+        var expression = /https?:\/\/(www\.)?youtube.com\/watch\b([v?=].*)/g
+        var regex = new RegExp(expression); 
 
-        if(patt.test(url) == false)
+        if(!url.match(regex))
             return;
 
         chrome.tabs.sendMessage(tabs[0].id, {action:"Load Summary"});
@@ -21,7 +22,7 @@ SummaryButton.onclick = e => {
             }   
         }
         // the api
-        xhr.open("GET", 'https://915557d30e19.ngrok.io/api/summarize?youtube_url=' + url, true);
+        xhr.open("GET", 'https://236490510636.ngrok.io/api/summarize?youtube_url=' + url, true);
         xhr.send();
     });
 };
