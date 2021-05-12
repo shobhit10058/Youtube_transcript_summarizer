@@ -4,7 +4,15 @@ chrome.runtime.onMessage.addListener(result =>{
 
     if(result.action == "print Summary"){   
         let st = document.getElementById('Summary');
-        st.innerHTML = result.summary;
+        s = "";
+        for(let i = 0; i < result.summary.length; i ++){
+            if(result.summary[i] == '\n')
+                s += '<br />';
+            else
+                s += result.summary[i];
+        }
+        st.innerHTML = s;
+        st.style.textAlign = "left";
     }
 
     if(result.action == "Load Summary"){
@@ -21,5 +29,6 @@ chrome.runtime.onMessage.addListener(result =>{
         }
         let st = document.getElementById('Summary');
         st.innerHTML = "Loading Summary.......";
+        st.style.textAlign = "center";
     }
 });
