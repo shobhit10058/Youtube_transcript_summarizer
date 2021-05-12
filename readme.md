@@ -66,6 +66,7 @@ It can be used by loading unpacked from [chrome://extensions/](chrome://extensio
 ### Improvements:
 1. Presently, only basic setup is done. Exception handling is left, if the url is not correct. 
    This would not happen when using chrome extension but if used independtly then it can occur.
+   Some expections: The video is live, url is not correct.
 2. Summarization needs to improved, if the content can be broken in some parts 
    and then summarization is done and that is given as time stamps.
    Sumy can be used.

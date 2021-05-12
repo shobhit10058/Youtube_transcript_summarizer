@@ -10,3 +10,12 @@ const iconRules = [{
 chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules(iconRules);
 });
+chrome.tabs.onUpdated.addListener(function
+    (tabId, changeInfo, tab) {
+        if (changeInfo.url) {
+            chrome.tabs.sendMessage( tabId, {
+                action: 'Initalize'
+            })
+        }
+    }
+);
