@@ -16,13 +16,12 @@ SummaryButton.onclick = e => {
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4){
                 if(xhr.status == 200){
-                    console.log(xhr.responseText);
                     chrome.tabs.sendMessage(tabs[0].id, {action:"print Summary", summary: xhr.responseText});            
                 }
             }   
         }
         // the api
-        xhr.open("GET", 'https://e255722bfcc2.ngrok.io/api/summarize?youtube_url=' + url, true);
+        xhr.open("GET", 'https://4d5c17282cf5.ngrok.io/api/summarize?youtube_url=' + url, true);
         xhr.send();
     });
 };
