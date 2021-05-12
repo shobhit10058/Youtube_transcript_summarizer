@@ -4,7 +4,7 @@ blis==0.7.4
 catalogue==2.0.4
 certifi==2020.12.5
 cffi==1.14.5
-chardet==4.0.0
+chardet==3.0.4
 click==7.1.2
 cryptography==3.4.7
 cycler==0.10.0
@@ -15,6 +15,7 @@ Flask-Cors==3.0.10
 flask-ngrok==0.0.25
 flatbuffers==1.12
 flax==0.3.3
+folium==0.2.1
 idna==2.10
 itsdangerous==1.1.0
 jax==0.2.13
@@ -54,9 +55,10 @@ tokenizers==0.10.2
 tqdm==4.60.0
 transformers==4.5.1
 typer==0.3.2
-urllib3==1.26.4
+urllib3==1.25.9
 wasabi==0.8.2
 Werkzeug==1.0.1
 youtube-transcript-api==0.4.1
 torch
 pyngrok
+sumy

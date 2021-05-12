@@ -68,6 +68,8 @@ It can be used by loading unpacked from [chrome://extensions/](chrome://extensio
    This would not happen when using chrome extension but if used independtly then it can occur.
 2. Summarization needs to improved, if the content can be broken in some parts 
    and then summarization is done and that is given as time stamps.
+   Sumy can be used.
 3. The transcript is presently working only for youtube videos having captions on, the audio and text processing are left.
-4. There can be extra features of choosing language and length of summary.
+4. There can be extra features of choosing language and length of summary. There can be option to convert the text 
+   to audio . 
 
