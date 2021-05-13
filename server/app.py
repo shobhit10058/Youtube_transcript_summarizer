@@ -6,10 +6,8 @@ from flask import request # used to parse payload
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
 from flask import render_template
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-from summarizer import Summarizer
-from flask import abort
 from flask_cors import CORS
+import os
 
 # define a variable to hold you app
 app = Flask(__name__)
@@ -34,31 +32,8 @@ def GetUrl():
     #   print("f")
     #   abort(404)
     
-    video_id = video_url.split('=')[1]
-    response = GetTranscript(video_id)
+    response = GetTranscript(video_url)
     return response
-
-def abs_sum(text, model, tokenizer):
-
-    tokens_input = tokenizer.encode("summarize: "+text, return_tensors='pt',
-                                    max_length=tokenizer.model_max_length,
-                                    truncation=True)
-
-    summary_ids = model.generate(tokens_input, min_length=80, max_length=150,
-                                length_penalty=15, num_beams=4)
-
-    summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
-
-    return summary
-
-def Summarize(text):
-    model = AutoModelForSeq2SeqLM.from_pretrained('t5-base')
-    tokenizer = AutoTokenizer.from_pretrained('t5-base')
-    bert_model = Summarizer()
-    ext_summary = bert_model(text, max_length=400)
-
-    summary_2 = abs_sum(ext_summary, model, tokenizer)
-    return summary_2
 
 def SumySummarize(text):
 
@@ -71,7 +46,7 @@ def SumySummarize(text):
 
     LANGUAGE = "english"
     SENTENCES_COUNT = 10
-    import nltk; 
+    import nltk;  
     nltk.download('punkt')
 
     # url = "https://en.wikipedia.org/wiki/Automatic_summarization"
@@ -87,14 +62,66 @@ def SumySummarize(text):
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
       s += (str)(sentence)
       s += "\n"
+    print('The summary is: ', s)
     return s
 
+def GetTextFromAudio():
+    import speech_recognition as sr
+    from pydub import AudioSegment
+    
+    f = ""
+
+    # convert mp3 file to wav           
+    for file in os.listdir(os.getcwd()):
+      if file.endswith(".mp3"):
+          f = os.path.join(os.getcwd(), file)
+          print(os.path.join(os.getcwd(), file))      
+                                          
+    if(len(f) == 0):
+      return f
+    print('The file is: ', f)
+    sound = AudioSegment.from_mp3(f)
+
+    os.remove(f)
+    
+    sound.export("transcript.wav", format="wav")
+    
+    # use the audio file as the audio source                                        
+    AUDIO_FILE = "transcript.wav"
+
+    r = sr.Recognizer()
+    with sr.AudioFile(AUDIO_FILE) as source:
+      audio = r.record(source)  # read the entire audio file    
+      print(audio)              
+      return (r.recognize_google(audio))
+
+def GetAudio(video_url):
+    from youtube_dl import YoutubeDL
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3'
+        }],
+    }
+    with YoutubeDL(ydl_opts) as ydl:
+       ydl.download([video_url])
+      
+
 # video id are the last characters in the link of youtube video
-def GetTranscript(video_id):
-    transcript = YouTubeTranscriptApi.get_transcript(video_id)
-    formatter = TextFormatter()
-    text_formatted = formatter.format_transcript(transcript)
-    return SumySummarize(text_formatted)
+def GetTranscript(video_url):
+    text = ""
+    try:
+      video_id = video_url.split('=')[1]
+      transcript = YouTubeTranscriptApi.get_transcript(video_id)
+      formatter = TextFormatter()
+      text = formatter.format_transcript(transcript)
+      return SumySummarize(text)
+    except:
+      GetAudio(video_url)
+      text = GetTextFromAudio()
+      print('The text is: ', text)
+      return SumySummarize(text)
 
 # server the app when this file is run
 if __name__ == '__main__': 

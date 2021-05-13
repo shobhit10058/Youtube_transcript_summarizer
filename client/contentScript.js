@@ -33,6 +33,7 @@ chrome.runtime.onMessage.addListener(result =>{
     
     if(result.action == "Initalize"){
         let txt = document.getElementById('Summary-Box');
-        txt.remove();
+        if(txt != null)
+            txt.remove();
     }
 });

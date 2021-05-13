@@ -59,6 +59,9 @@ urllib3==1.25.9
 wasabi==0.8.2
 Werkzeug==1.0.1
 youtube-transcript-api==0.4.1
-torch
 pyngrok
+ffmpeg-python
+SpeechRecognition
+pydub
 sumy
+youtube_dl
