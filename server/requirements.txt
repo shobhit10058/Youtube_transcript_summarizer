@@ -34,7 +34,7 @@ pathy==0.5.2
 Pillow==8.2.0
 preshed==3.0.5
 pycparser==2.20
-pydantic==1.7.3
+pydantic==1.7.4
 pyOpenSSL==20.0.1
 pyparsing==2.4.7
 python-dateutil==2.8.1
