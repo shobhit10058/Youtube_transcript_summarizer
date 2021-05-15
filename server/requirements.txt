@@ -65,3 +65,4 @@ SpeechRecognition
 pydub
 sumy
 youtube_dl
+pyaudio

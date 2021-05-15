@@ -6,6 +6,7 @@ from flask import request # used to parse payload
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
 from flask import render_template
+from flask import abort
 from flask_cors import CORS
 import os
 
@@ -74,15 +75,14 @@ def GetTextFromAudio():
     # convert mp3 file to wav           
     for file in os.listdir(os.getcwd()):
       if file.endswith(".mp3"):
-          f = os.path.join(os.getcwd(), file)
-          print(os.path.join(os.getcwd(), file))      
+          f = file      
                                           
     if(len(f) == 0):
       return f
     print('The file is: ', f)
     sound = AudioSegment.from_mp3(f)
 
-    os.remove(f)
+    os.rename(os.path.join(os.getcwd(), f), os.path.join(os.getcwd(), "recordings", f))
     
     sound.export("transcript.wav", format="wav")
     
