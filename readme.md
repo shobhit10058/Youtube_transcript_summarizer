@@ -21,9 +21,10 @@ The above structure is taken owing to implementation of Restful services.
     ngrok.connect(LOCALHOST_PORT)
     ```
 5. Everything is done, run the app now. You can acess the website using the url provided above(change http to https in front of the url).
-6. Next load the chrome extension folder [client](/client) unpacked from [chrome://extensions/](chrome://extensions/).
+6. Also change the server link in [popup.js](/client/popup.js) file in get request to API.
+7. Next load the chrome extension folder [client](/client) unpacked from [chrome://extensions/](chrome://extensions/).
    Go to [youtube](https://youtube.com/) and open a video and click on summarize and see the summary.
-7. Also change the server link in [popup.js](/client/popup.js) file in get request to API.
+8. connect to ngrok each time app is run a new time.
 
 ### Server:
 It is a simple flask app, which has a API /api/summarize?youtube_video='url' which can be used to get the summary of a
