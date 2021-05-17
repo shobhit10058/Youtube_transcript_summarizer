@@ -111,34 +111,35 @@ def StringTime(time):
 def GetTranscript(video_url):
     text = ""
     try:
-      duration = 300
       video_id = video_url.split('=')[1]
       transcript = YouTubeTranscriptApi.get_transcript(video_id)
-      i, ps_d, st = 0, 0, 0
+      duration = max(30, transcript[-1]['start'] // 5)
+      i, end, st = 0, 0, 0
       text, ps_text = "", ""
       while(i < len(transcript)):
-        if(ps_d < duration):
-          ps_d += transcript[i]['duration']
+        if(end - st < duration):
+          end = transcript[i]['start'] + transcript[i]['duration']
           ps_text += transcript[i]['text']
           ps_text += ". "
         else:
-          text += "[ " + StringTime(st) + " - " + StringTime(st + duration) + "] " + SumySummarize(ps_text) + "\n\n"
-          ps_d = transcript[i]['duration']
+          text += "[ " + StringTime(st) + " - " + StringTime(end) + "] " + SumySummarize(ps_text) + "\n\n"
+          end = transcript[i]['start'] + transcript[i]['duration']
           ps_text = transcript[i]['text']
-          st += duration
+          st = end
         i += 1
-      text += "[ " + StringTime(st) + " - " + StringTime(st + ps_d) + "] " + SumySummarize(ps_text) + "\n\n"
+      text += "[ " + StringTime(st) + " - " + StringTime(end) + "] " + SumySummarize(ps_text) + "\n\n"
       print(text)
       # formatter = TextFormatter()
       # text = formatter.format_transcript(transcript)
       # text = text.replace('\n', '.\n')
       return text
-    except:
+    except Exception as e:
+      print(e)
       GetAudio(video_url)
       text = GetTextFromAudio()
       print('The text is: ', text)
       return SumySummarize(text)
-
+      
 # server the app when this file is run
 if __name__ == '__main__': 
   app.run()
