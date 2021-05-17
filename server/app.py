@@ -128,10 +128,6 @@ def GetTranscript(video_url):
           st = end
         i += 1
       text += "[ " + StringTime(st) + " - " + StringTime(end) + "] " + SumySummarize(ps_text) + "\n\n"
-      print(text)
-      # formatter = TextFormatter()
-      # text = formatter.format_transcript(transcript)
-      # text = text.replace('\n', '.\n')
       return text
     except Exception as e:
       print(e)
