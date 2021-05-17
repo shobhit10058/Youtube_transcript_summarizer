@@ -46,7 +46,7 @@ def SumySummarize(text):
     from sumy.utils import get_stop_words
 
     LANGUAGE = "english"
-    SENTENCES_COUNT = 10
+    SENTENCES_COUNT = 3
     import nltk;  
     nltk.download('punkt')
 
@@ -62,8 +62,6 @@ def SumySummarize(text):
     s = ""
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
       s += (str)(sentence)
-      s += "\n"
-    print('The summary is: ', s)
     return s
 
 def GetTextFromAudio():
@@ -79,7 +77,6 @@ def GetTextFromAudio():
                                           
     if(len(f) == 0):
       return f
-    print('The file is: ', f)
     sound = AudioSegment.from_mp3(f)
 
     os.rename(os.path.join(os.getcwd(), f), os.path.join(os.getcwd(), "recordings", f))
@@ -92,7 +89,6 @@ def GetTextFromAudio():
     r = sr.Recognizer()
     with sr.AudioFile(AUDIO_FILE) as source:
       audio = r.record(source)  # read the entire audio file    
-      print(audio)              
       return (r.recognize_google(audio))
 
 def GetAudio(video_url):
@@ -107,16 +103,36 @@ def GetAudio(video_url):
     with YoutubeDL(ydl_opts) as ydl:
        ydl.download([video_url])
       
+def StringTime(time):
+   time = (int)(time)
+   return (str)(time // 60) + ":" + (str)(time % 60) 
 
 # video id are the last characters in the link of youtube video
 def GetTranscript(video_url):
     text = ""
     try:
+      duration = 300
       video_id = video_url.split('=')[1]
       transcript = YouTubeTranscriptApi.get_transcript(video_id)
-      formatter = TextFormatter()
-      text = formatter.format_transcript(transcript)
-      return SumySummarize(text)
+      i, ps_d, st = 0, 0, 0
+      text, ps_text = "", ""
+      while(i < len(transcript)):
+        if(ps_d < duration):
+          ps_d += transcript[i]['duration']
+          ps_text += transcript[i]['text']
+          ps_text += ". "
+        else:
+          text += "[ " + StringTime(st) + " - " + StringTime(st + duration) + "] " + SumySummarize(ps_text) + "\n\n"
+          ps_d = transcript[i]['duration']
+          ps_text = transcript[i]['text']
+          st += duration
+        i += 1
+      text += "[ " + StringTime(st) + " - " + StringTime(st + ps_d) + "] " + SumySummarize(ps_text) + "\n\n"
+      print(text)
+      # formatter = TextFormatter()
+      # text = formatter.format_transcript(transcript)
+      # text = text.replace('\n', '.\n')
+      return text
     except:
       GetAudio(video_url)
       text = GetTextFromAudio()

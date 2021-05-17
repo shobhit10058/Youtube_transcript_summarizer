@@ -21,7 +21,7 @@ SummaryButton.onclick = e => {
             }   
         }
         // the api
-        xhr.open("GET", 'https://49894af652ac.ngrok.io/api/summarize?youtube_url=' + url, true);
+        xhr.open("GET", 'https://c960b52b2ce0.ngrok.io/api/summarize?youtube_url=' + url, true);
         xhr.send();
     });
 };

@@ -76,3 +76,5 @@ It can be used by loading unpacked from [chrome://extensions/](chrome://extensio
    to audio . 
 5. The summary of some 10-15 minutes as time stamps can be given, then a person can also search for a keyword, when it
    is discussed and can go directly to that time .
+
+![](images/Present.png)
