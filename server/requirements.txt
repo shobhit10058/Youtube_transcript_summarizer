@@ -55,7 +55,7 @@ tokenizers==0.10.2
 tqdm==4.60.0
 transformers==4.5.1
 typer==0.3.2
-urllib3==1.25.9
+urllib3==1.26.5
 wasabi==0.8.2
 Werkzeug==1.0.1
 youtube-transcript-api==0.4.1
