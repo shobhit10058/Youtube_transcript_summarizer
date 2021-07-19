@@ -37,12 +37,10 @@ let create_box = (box, url, content)=>{
 chrome.runtime.onMessage.addListener(result =>{
 
     if(result.action == "print Summary"){   
-        console.log(result);
         let box = document.getElementById("Summary-Box");
         box.removeChild(document.getElementById("Load-text"));
         for(let i = 0; i < result.summary.length; i ++){
             create_box(box, result.video_url, (result.summary)[i]);
-            console.log((result.summary)[i].text);
         }
     }
 
@@ -63,7 +61,6 @@ chrome.runtime.onMessage.addListener(result =>{
         temp.id = "Load-text";
         temp.innerHTML = "Loading Summary.......";
         txt.appendChild(temp);
-        console.log(txt);
     }    
     
     if(result.action == "Initalize"){

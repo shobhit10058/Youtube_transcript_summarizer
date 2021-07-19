@@ -1,4 +1,8 @@
 This is to help generate the summary of youtube videos.
+### Features: 
+1. Generates summary on a simple click within 1-2 minutes.
+2. Timestamps are present with summary which directs to that part on clicking the timestamp.
+
 The basic strategy it uses is using ML summarizing techniques on the transcript of the video.
 
 The project is divided in two separate entities: 
