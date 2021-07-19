@@ -111,7 +111,7 @@ def StringTime(time):
 def GetTranscript(video_url):
     text = ""
     try:
-      video_id = video_url.split('=')[1]
+      video_id = (video_url.split('=')[1]).split("&")[0]
       transcript = YouTubeTranscriptApi.get_transcript(video_id)
       duration = max(30, transcript[-1]['start'] // 5)
       i, end, st = 0, 0, 0
