@@ -5,7 +5,28 @@
     font-family: inherit;
     border-bottom: 0.2px solid black;
 }
-.summary_box p{
-    padding: 5px;
+.summary_box a{
     font-size: medium;
+}
+.summary_box p{
+    font-size: medium;
+    padding-bottom: 5px;
+}
+.wrapper{
+    position: relative;
+}
+.time-box,.content-box{
+    float: left;
+}
+.time-box{
+    width: 17%;
+}
+.time-box a{
+    text-decoration: none;
+}
+.content-box{
+    width: 83%;
+}
+#Load-text{
+    text-align: center;
 }
