@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
-from flask import Flask
+from flask import Flask, jsonify
 import datetime
 from flask import request # used to parse payload
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -34,7 +34,7 @@ def GetUrl():
     #   abort(404)
     
     response = GetTranscript(video_url)
-    return response
+    return jsonify(response)
 
 def SumySummarize(text):
 
@@ -116,25 +116,28 @@ def GetTranscript(video_url):
       duration = max(30, transcript[-1]['start'] // 5)
       i, end, st = 0, 0, 0
       text, ps_text = "", ""
+      summary_content = []
       while(i < len(transcript)):
         if(end - st < duration):
           end = transcript[i]['start'] + transcript[i]['duration']
           ps_text += transcript[i]['text']
           ps_text += ". "
         else:
-          text += "[ " + StringTime(st) + " - " + StringTime(end) + "] " + SumySummarize(ps_text) + "\n\n"
+          # text += "[ " + StringTime(st) + " - " + StringTime(end) + "] " + SumySummarize(ps_text) + "\n\n"
+          summary_content.append({"start": StringTime(st), "end": StringTime(end), "text": SumySummarize(ps_text)})
+          st = end
           end = transcript[i]['start'] + transcript[i]['duration']
           ps_text = transcript[i]['text']
-          st = end
+
         i += 1
-      text += "[ " + StringTime(st) + " - " + StringTime(end) + "] " + SumySummarize(ps_text) + "\n\n"
-      return text
+      summary_content.append({"start": StringTime(st), "end": StringTime(end), "text": SumySummarize(ps_text)})
+      # text += "[ " + StringTime(st) + " - " + StringTime(end) + "] " + SumySummarize(ps_text) + "\n\n"
+      return summary_content
     except Exception as e:
-      print(e)
-      GetAudio(video_url)
-      text = GetTextFromAudio()
-      print('The text is: ', text)
-      return SumySummarize(text)
+      # GetAudio(video_url)
+      # text = GetTextFromAudio()
+      # print('The text is: ', text)
+      return e
       
 # server the app when this file is run
 if __name__ == '__main__': 
