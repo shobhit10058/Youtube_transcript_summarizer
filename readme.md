@@ -42,11 +42,13 @@ for which if the video has already transcript then it is used with the help of a
 library *youtube-transcript-api* ,otherwise first the audio is taken and speech to text transformation is done.
 Again useful python libraries for used for this.
 
-After this, the summary is generated using the transformers. As described here [Useful Blog](https://www.thepythoncode.com/article/text-summarization-using-huggingface-transformers-python), there are two ways to do this
+After this, the summary can be generated using the transformers. As described here [Useful Blog](https://www.thepythoncode.com/article/text-summarization-using-huggingface-transformers-python), there are two ways to do this
 1. Extractive summarization
 2. Abstractive summarization
 
 The length of the transcript short by applying *extractive summarization* with *bert model* and then the *T5 model* is used .
+
+Here, currently sumy with LSA summarizer is used.
 
 The summary is then given back as a HTTP response after one gives a GET HTTP request on */api/summarize?youtube_video="a valid url"*.
 
@@ -78,4 +80,4 @@ It can be used by loading unpacked from [chrome://extensions/](chrome://extensio
 5. The summary of some 10-15 minutes as time stamps can be given, then a person can also search for a keyword, when it
    is discussed and can go directly to that time .
 
-![](images/Present.png)
+![](images/updated-design.png)
