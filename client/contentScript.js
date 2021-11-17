@@ -46,15 +46,15 @@ chrome.runtime.onMessage.addListener(result =>{
 
     if(result.action == "Load Summary"){
         
-        let player = document.getElementById('info');
+        let player = document.getElementById('info-contents');
         let txt = document.getElementById('Summary-Box');
-        if(txt == null){
-            txt = document.createElement("div");
-            player.appendChild(txt);
-        }
+        if(txt != null)
+            txt.remove();
+        txt = document.createElement("div");
+        player.appendChild(txt);
         while(txt.childNodes.length > 0)
             txt.removeChild(txt.firstChild());
-        
+        console.log(txt);
         txt.className = 'style-scope ytd-watch-flexy summary_box';
         txt.id = "Summary-Box";
         let temp = document.createElement("p");
