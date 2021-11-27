@@ -12,10 +12,13 @@ The project is divided in two separate entities:
 The above structure is taken owing to implementation of Restful services.
 
 ### Installation:
-1. Clone the repo.
+1. Clone the repo. For setting up the backend locally follow 2-6 else directly proceed to 8.
+
 2. Go in the server folder and create, activate a virtual environment and install the requirements
    with pip or pip3 install -r requirements.txt .If you can manage installing torch, else
+
 3. Install these on google colab ,use [notebook](/server/Youtube_transcript_summarizer.ipynb) for assistance.
+
 4. Make a account on [ngrok.com](https://ngrok.com/) and run the following cell with the auth token from [dashboard](https://dashboard.ngrok.com/get-started/setup)
     ```
     ! ngrok authtoken YOUR_AUTH_TOKEN
@@ -24,11 +27,15 @@ The above structure is taken owing to implementation of Restful services.
     #LOCALHOST_PORT can be seen by first running the run and seeing the port in localhost  
     ngrok.connect(LOCALHOST_PORT)
     ```
+
 5. Everything is done, run the app now. You can acess the website using the url provided above(change http to https in front of the url).
+
 6. Also change the server link in [popup.js](/client/popup.js) file in get request to API.
-7. Next load the chrome extension folder [client](/client) unpacked from [chrome://extensions/](chrome://extensions/).
+
+7. connect to ngrok each time app is run a new time.
+
+8. Next load the chrome extension folder [client](/client) unpacked from [chrome://extensions/](chrome://extensions/).
    Go to [youtube](https://youtube.com/) and open a video and click on summarize and see the summary.
-8. connect to ngrok each time app is run a new time.
 
 ### Server:
 It is a simple flask app, which has a API /api/summarize?youtube_video='url' which can be used to get the summary of a

@@ -4,3 +4,4 @@ flask_cors
 sumy
 nltk
 pyngrok
+numpy
