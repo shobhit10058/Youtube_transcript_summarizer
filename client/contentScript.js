@@ -54,7 +54,6 @@ chrome.runtime.onMessage.addListener(result =>{
         player.appendChild(txt);
         while(txt.childNodes.length > 0)
             txt.removeChild(txt.firstChild());
-        console.log(txt);
         txt.className = 'style-scope ytd-watch-flexy summary_box';
         txt.id = "Summary-Box";
         let temp = document.createElement("p");
