@@ -3,7 +3,7 @@ SummaryButton.onclick = e => {
     e.preventDefault();
 
     chrome.tabs.query({active: true, currentWindow: true}, tabs => {    
-        let url = tabs[0].url;
+        let url = tabs[0].url.split("&")[0];
         var expression = /https?:\/\/(www\.)?youtube.com\/watch\b([v?=].*)/g
         var regex = new RegExp(expression); 
 
