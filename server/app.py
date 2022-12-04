@@ -36,17 +36,18 @@ def GetUrl():
     response = GetTranscript(video_url)
     return jsonify(response)
 
-def SumySummarize(text):
+def SumySummarize(text: str):
 
     from sumy.parsers.html import HtmlParser
     from sumy.parsers.plaintext import PlaintextParser
     from sumy.nlp.tokenizers import Tokenizer
-    from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+    from sumy.parsers.plaintext import PlaintextParser
+    from sumy.summarizers.lex_rank import LexRankSummarizer as Summarizer
     from sumy.nlp.stemmers import Stemmer
     from sumy.utils import get_stop_words
 
     LANGUAGE = "english"
-    SENTENCES_COUNT = 3
+    SENTENCES_COUNT = min(10, max(3, text.count(".") // 20))
     import nltk;  
     nltk.download('punkt')
 
@@ -113,7 +114,7 @@ def GetTranscript(video_url):
     try:
       video_id = (video_url.split('=')[1]).split("&")[0]
       transcript = YouTubeTranscriptApi.get_transcript(video_id)
-      duration = max(30, transcript[-1]['start'] // 5)
+      duration = max(12 * 60, (transcript[-1]['start'] + transcript[-1]['duration']) // 10)
       i, end, st = 0, 0, 0
       text, ps_text = "", ""
       summary_content = []

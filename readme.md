@@ -12,7 +12,7 @@ The project is divided in two separate entities:
 The above structure is taken owing to implementation of Restful services.
 
 ### Installation:
-1. Clone the repo. For setting up the backend locally follow 2-6 else directly proceed to 8.
+1. Clone the repo.
 
 2. Go in the server folder and create, activate a virtual environment and install the requirements
    with pip or pip3 install -r requirements.txt .If you can manage installing torch, else

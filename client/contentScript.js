@@ -35,10 +35,12 @@ let create_box = (box, url, content)=>{
 };
 
 chrome.runtime.onMessage.addListener(result =>{
+    // console.log(result.action);
 
     if(result.action == "print Summary"){   
         let box = document.getElementById("Summary-Box");
         box.removeChild(document.getElementById("Load-text"));
+        // console.log(result.summary);
         for(let i = 0; i < result.summary.length; i ++){
             create_box(box, result.video_url, (result.summary)[i]);
         }
@@ -46,20 +48,21 @@ chrome.runtime.onMessage.addListener(result =>{
 
     if(result.action == "Load Summary"){
         
-        let player = document.getElementById('info-contents');
+        let player = document.getElementById('top-row');
         let txt = document.getElementById('Summary-Box');
         if(txt != null)
             txt.remove();
         txt = document.createElement("div");
-        player.appendChild(txt);
+        player.parentNode.insertBefore(txt, player.nextSibling);
         while(txt.childNodes.length > 0)
             txt.removeChild(txt.firstChild());
-        txt.className = 'style-scope ytd-watch-flexy summary_box';
+        txt.className = 'style-scope ytd-watch-metadata summary_box';
         txt.id = "Summary-Box";
         let temp = document.createElement("p");
         temp.id = "Load-text";
         temp.innerHTML = "Loading Summary.......";
         txt.appendChild(temp);
+        console.log({player, txt});
     }    
     
     if(result.action == "Initalize"){

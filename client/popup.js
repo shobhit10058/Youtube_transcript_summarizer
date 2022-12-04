@@ -21,7 +21,7 @@ SummaryButton.onclick = e => {
             }   
         }
         // the api
-        xhr.open("GET", 'https://warm-crag-10375.herokuapp.com/api/summarize?youtube_url=' + url, true);
+        xhr.open("GET", 'https://2450-2401-4900-1f3c-4f48-fe17-4f79-96a2-8bf5.ngrok.io/api/summarize?youtube_url=' + url, true);
         xhr.send();
     });
 };
