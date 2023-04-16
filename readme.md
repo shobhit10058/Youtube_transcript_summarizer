@@ -14,12 +14,11 @@ The above structure is taken owing to implementation of Restful services.
 ### Installation:
 1. Clone the repo.
 
-2. Go in the server folder and create, activate a virtual environment and install the requirements
+2. Go in the server folder and, create and activate a virtual environment and install the requirements
    with pip or pip3 install -r requirements.txt .If you can manage installing torch, else
+   Install these on google colab ,use [notebook](/server/Youtube_transcript_summarizer.ipynb) for assistance.
 
-3. Install these on google colab ,use [notebook](/server/Youtube_transcript_summarizer.ipynb) for assistance.
-
-4. Make a account on [ngrok.com](https://ngrok.com/) and run the following cell with the auth token from [dashboard](https://dashboard.ngrok.com/get-started/setup)
+3. Make a account on [ngrok.com](https://ngrok.com/) and run the following cell with the auth token from [dashboard](https://dashboard.ngrok.com/get-started/setup)
     ```
     ! ngrok authtoken YOUR_AUTH_TOKEN
     from pyngrok import ngrok
@@ -28,13 +27,13 @@ The above structure is taken owing to implementation of Restful services.
     ngrok.connect(LOCALHOST_PORT)
     ```
 
-5. Everything is done, run the app now. You can acess the website using the url provided above(change http to https in front of the url).
+4. Everything is done, run the app now. You can acess the website using the url provided above(change http to https in front of the url).
 
-6. Also change the server link in [popup.js](/client/popup.js) file in get request to API.
+5. Also change the server link in [popup.js](/client/popup.js) file in get request to API.
 
-7. connect to ngrok each time app is run a new time.
+6. connect to ngrok each time app is run a new time.
 
-8. Next load the chrome extension folder [client](/client) unpacked from [chrome://extensions/](chrome://extensions/).
+7. Next load the chrome extension folder [client](/client) unpacked from [chrome://extensions/](chrome://extensions/).
    Go to [youtube](https://youtube.com/) and open a video and click on summarize and see the summary.
 
 ### Server:
